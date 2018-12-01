@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { ListarService } from './listar.service';
+import { ListarService } from '../http.service';
 
 export interface PeriodicElement {
   name: string;

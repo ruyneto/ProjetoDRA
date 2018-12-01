@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {ListarService } from './listar/listar.service';
+import {ListarService } from './http.service';
 import { AppComponent } from './app.component';
 import { ListarComponent } from './listar/listar.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,4 +21,6 @@ import { CadastrarComponent } from './cadastrar/cadastrar.component';
   providers: [ListarService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}
