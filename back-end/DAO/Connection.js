@@ -5,7 +5,7 @@ var mongoclient = new MongoClient(new Server("localhost", 27017), {native_parser
 var dbo;
 
 
-function inserir(objeto){
+exports.inserir = function(objeto){
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("projeto");
@@ -18,5 +18,14 @@ function inserir(objeto){
   });
 }
 
-
-module.exports = inserir;
+exports.listar = function(){
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("projeto");
+      dbo.collection("usuario").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    return result;
+    db.close();
+  });
+  });
+}
