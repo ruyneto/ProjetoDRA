@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 var cors = require('cors');
 var bodyParser = require('body-parser');
+const inserir = require("./DAO/Connection.js");
 var corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -23,6 +24,13 @@ res.json({"lista":[{"nome":"ruyneto","senha":"321987"},
         ]})
 });
 
+
+
+
 app.listen(300,function(){
   console.log("Server on.");
+});
+
+app.post('/inserir',function(req,res){
+  inserir(request.body);
 });
