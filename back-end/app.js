@@ -31,6 +31,6 @@ app.listen(300,function(){
   console.log("Server on.");
 });
 
-app.post('/inserior',function(req,res){
+app.post('/inserir',function(req,res){
   inserir(request.body);
 });
