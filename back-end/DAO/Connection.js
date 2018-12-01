@@ -5,10 +5,7 @@ var mongoclient = new MongoClient(new Server("localhost", 27017), {native_parser
 var dbo;
 
 
-
-
-
-module.exports = function inserir(objeto){
+function inserir(objeto){
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("projeto");
@@ -20,3 +17,6 @@ module.exports = function inserir(objeto){
     });
   });
 }
+
+
+module.exports = inserir;
