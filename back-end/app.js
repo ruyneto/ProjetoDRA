@@ -4,6 +4,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 const inserir = require("./DAO/Connection.js").inserir;
 const listar = require("./DAO/Connection.js").listar;
+const deletar = require("./DAO/Connection.js").deletar;
 var corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -14,15 +15,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors(corsOptions))
 app.use(bodyParser.json());
-
 app.get('/',function(req,res){
-res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-listar(res);
-
-
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+  console.log(listar(res));
 });
 
-
+app.get('/deletar',function(req,res){
+     res.send("Passei por aqui");
+    deletar(req.body);
+});
 
 app.post('/inserir',function(req,res){
   inserir(req.body);
