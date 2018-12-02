@@ -14,9 +14,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors(corsOptions))
 app.use(bodyParser.json());
+
 app.get('/',function(req,res){
 res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-console.log(JSON.stringify(listar());
+listar(res);
+
+
 });
 
 

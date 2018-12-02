@@ -18,14 +18,15 @@ exports.inserir = function(objeto){
   });
 }
 
-exports.listar = function(){
+exports.listar = function(res) {
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("projeto");
       dbo.collection("usuario").find({}).toArray(function(err, result) {
     if (err) throw err;
-    return result;
+    res.json(result);
     db.close();
   });
-  });
+});
+
 }
