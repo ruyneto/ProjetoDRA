@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 
+
+
 @Injectable()
-export class ListarService{
+export class HttpService{
     users = [];
     baseURL: string;
     flag = false;
@@ -13,10 +15,10 @@ export class ListarService{
 
     getUsuarios(component){
 
-       this.http.get(this.baseURL)
+       this.http.get(this.baseURL, {})
        .subscribe((data: any) => {
-        console.log("tamanho: "+data.lista.length);    
-        data.lista.forEach(element => {
+        console.log("tamanho: "+data.length);    
+        data.forEach(element => {
                 this.users.push({
                     nome: element.nome,
                     senha : element.senha
@@ -28,8 +30,13 @@ export class ListarService{
                                    
                                     
     }
-   
     
-
+    cadastrarUsuario(usuario){
+        console.log("inspecao:"+this.baseURL+'inserir');
+        this.http.post(this.baseURL+'inserir', usuario).subscribe((data: any) => {
+        console.log("data resposta: "+data);    
+          
+        })
+    }
     
 }
