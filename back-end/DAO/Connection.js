@@ -1,47 +1,44 @@
-const MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
-var Server = require('mongodb').Server;
-var mongoclient = new MongoClient(new Server("localhost", 27017), {native_parser: true});
-var ObjectId = require('mongodb').ObjectId;
-var dbo;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+ mongoose.connect('mongodb://127.0.0.1:27017/projeto');
 
 
-exports.inserir = function(objeto){
-  MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("projeto");
-    var myobj = objeto;
-    dbo.collection("usuario").insertOne(myobj, function(err, res) {
-      if (err) throw err;
-      console.log("1 document inserted");
-      db.close();
-    });
-  });
-}
 
-exports.deletar = function(objeto){
-  MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("projeto");
-    var myobj = objeto;
-    dbo.collection("usuario").deleteOne(myobj, function(err, res) {
-      if (err) throw err;
-      console.log("1 document deletar");
-      db.close();
-    });
-  });
-}
-
-
-exports.listar = function(res) {
-  MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("projeto");
-      dbo.collection("usuario").find({}).toArray(function(err, result) {
-    if (err) throw err;
-    res.json(result);
-    db.close();
-  });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log("Conectado");
 });
+
+var usuarioSchema = new mongoose.Schema({
+  nome: String,
+  senha: String
+});
+
+var Usuario = mongoose.model('usuario', usuarioSchema,"usuario");
+
+
+
+exports.inserir = function inserir(obj){
+  var us1 = Usuario(obj);
+  us1.save(function(err,msg){
+    console.log(msg);
+  });
+};
+
+
+exports.listar = function listar(res){
+
+  Usuario.find(function (err, docs) {
+      res.send(docs);
+      });
+}
+
+exports.excluir = function excluir(obj){
+  Usuario.deleteOne(obj, function (err) {
+    if (err) return handleError(err);
+    console.log("1 Arquivo deletado");
+  });
 
 }
