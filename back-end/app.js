@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 const inserir = require("./DAO/Connection.js").inserir;
 const listar = require("./DAO/Connection.js").listar;
 const excluir = require("./DAO/Connection.js").excluir;
+const update = require("./DAO/Connection.js").update;
 var corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -29,6 +30,12 @@ app.delete('/deletar',function(req,res){
 app.post('/inserir',function(req,res){
   inserir(req.body);
 });
+app.put("/update",function(req,res){
+  console.log("Passou pelo app update.");
+  update(req);
+});
+
+
 app.listen(300,function(){
   console.log("Server on.");
 });
