@@ -40,5 +40,19 @@ exports.excluir = function excluir(obj){
     if (err) return handleError(err);
     console.log("1 Arquivo deletado");
   });
+}
 
+exports.update = function update(req){
+  var user = Usuario(req.body);
+  console.log(user._id);
+  Usuario.findById(user._id, function (err, us1) {
+  if (err) return handleError(err);
+
+  us1.set(req.body);
+  us1.save(function (err, updatedTank) {
+    if (err) return handleError(err);
+    console.log(updatedTank);
+  });
+});
+  console.log("1 Arquivo Atualizado");
 }
