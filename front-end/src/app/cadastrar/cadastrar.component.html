@@ -1,11 +1,14 @@
 <p>
   cadastrar works!
 </p>
-<h1>Nome: </h1>
-<input [(ngModel)]="usuario.nome" placeholder="nome" type="text" >
-<br>
-<h1>Senha: </h1>
-<input type="text" [(ngModel)]="usuario.senha" placeholder="senha">
 
-<button mat-raised-button (click)="cadastrar()" >Cadastrar</button>
+  <h1>Nome: </h1>
+  <input [(ngModel)]="usuario.nome" placeholder="nome" type="text" >
+  <br>
+  <h1>Senha: </h1>
+  <input type="text" [(ngModel)]="usuario.senha" placeholder="senha">
+  
+  <button mat-raised-button color="primary" class="button" (click)="cadastrar()" >Cadastrar</button>
+
+
 

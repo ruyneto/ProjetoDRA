@@ -21,19 +21,27 @@ export interface Pessoa {
   styleUrls: ['./listar.component.css']
 })
 export class ListarComponent implements OnInit {
-  displayedColumns: string[] = ['nome', 'senha'];
-    users : Pessoa[];
+  //displayedColumns: string[] = ['nome', 'senha'];
+    users = [];
+    user;
     httpService : HttpService;
-    flag = false;
-
+    atualizar = false;
   constructor(httpService : HttpService) { 
     this.httpService = httpService;
     this.users = this.httpService.users;
-    this.flag = this.httpService.flag;
   }
 
   ngOnInit() {
-    this.httpService.getUsuarios(this);   
+    this.httpService.getUsuarios();   
+  }
+  deletar(usuario){
+    console.log('usuario.id'+usuario._id);
+    this.httpService.deletarUsuario(usuario);
+
   }
 
+  alterar(usuario){
+    this.user = usuario;
+    this.atualizar = true;
+  }
 }

@@ -7,7 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule, MatInputModule, MatPaginatorModule, MatTableModule, MatSortModule } from '@angular/material';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
 import {MatButtonModule} from '@angular/material/button';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { FormsModule } from '@angular/forms';
+import { AtualizarComponent } from './atualizar/atualizar.component';
+import { AppRoutingModule } from './app-routing.module'; // <-- NgModel lives here
 
 
 
@@ -15,14 +17,16 @@ import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
   declarations: [
     AppComponent,
     ListarComponent,
-    CadastrarComponent
+    CadastrarComponent,
+    AtualizarComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     MatTableModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

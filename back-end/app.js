@@ -23,16 +23,16 @@ app.get('/',function(req,res){
 });
 
 app.delete('/deletar',function(req,res){
-     res.send("Passei por aqui");
-    excluir(req.body);
+    excluir(req.body,res);
 });
 
 app.post('/inserir',function(req,res){
-  inserir(req.body);
+  inserir(req.body,res);
 });
+
 app.put("/update",function(req,res){
   console.log("Passou pelo app update.");
-  update(req);
+  update(req,res);
 });
 
 

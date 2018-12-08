@@ -20,10 +20,11 @@ var Usuario = mongoose.model('usuario', usuarioSchema,"usuario");
 
 
 
-exports.inserir = function inserir(obj){
+exports.inserir = function inserir(obj,res){
   var us1 = Usuario(obj);
   us1.save(function(err,msg){
     console.log(msg);
+    res.json({'resposta':'inserido com sucesso'});
   });
 };
 
@@ -35,14 +36,17 @@ exports.listar = function listar(res){
       });
 }
 
-exports.excluir = function excluir(obj){
+exports.excluir = function excluir(obj,res){
   Usuario.deleteOne(obj, function (err) {
     if (err) return handleError(err);
+      
     console.log("1 Arquivo deletado");
+    res.json({'resposta':'excluido com sucesso'});
+
   });
 }
 
-exports.update = function update(req){
+exports.update = function update(req,res){
   var user = Usuario(req.body);
   console.log(user._id);
   Usuario.findById(user._id, function (err, us1) {
@@ -52,7 +56,10 @@ exports.update = function update(req){
   us1.save(function (err, updatedTank) {
     if (err) return handleError(err);
     console.log(updatedTank);
+
+  console.log("1 Arquivo Atualizado");
+  res.json({'resposta':'atualizad com sucesso'});
   });
 });
-  console.log("1 Arquivo Atualizado");
+
 }

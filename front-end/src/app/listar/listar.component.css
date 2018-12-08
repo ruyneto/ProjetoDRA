@@ -1,3 +1,42 @@
 table {
     width: 100%;
   }
+  .users {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 40%;
+  }
+
+  .users li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em 0;
+    height: 2em;
+    border-radius: 4px;
+  }
+
+  .users .text {
+    position: relative;
+    top: 7px;
+    margin-left: 10px;
+  }
+  .users li:hover {
+    color: #607D8B;
+    background-color: #DDD;
+    left: .1em;
+  }
+
+  .button1{
+    position: absolute;
+    right: 20%;
+    height: 80%;
+  }
+  .button2{
+    position: absolute;
+    right: 1%;
+    height: 80%;
+  }

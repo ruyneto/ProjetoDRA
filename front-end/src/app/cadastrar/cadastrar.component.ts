@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import {MatButtonModule} from '@angular/material/button';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -15,10 +17,9 @@ export class CadastrarComponent implements OnInit {
     "senha" : ""
   }
 
-  httpService : HttpService;
-  constructor(httpService : HttpService) { 
-    this.httpService = httpService;
-    //this.flag = this.httpService.flag;
+   constructor(public httpService : HttpService, private route: ActivatedRoute,  private location: Location) { 
+    
+    this.httpService.location = location;
   }
   ngOnInit() {
   

@@ -1,42 +1,64 @@
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-
-
 @Injectable()
-export class HttpService{
+export class HttpService {
     users = [];
     baseURL: string;
     flag = false;
-    constructor(private http:HttpClient){
+    location;
+    constructor(private http: HttpClient) {
         this.baseURL = 'http://localhost:300/';
     }
 
-    getUsuarios(component){
+    getUsuario(id) {
+        let usuario;
+        this.users.forEach(element => {
+            if (element._id == id) usuario = element;
+        });;
+        return usuario;
+    }
 
-       this.http.get(this.baseURL, {})
-       .subscribe((data: any) => {
-        console.log("tamanho: "+data.length);    
-        data.forEach(element => {
-                this.users.push({
-                    nome: element.nome,
-                    senha : element.senha
+    getUsuarios() {
+
+        this.http.get(this.baseURL)
+            .subscribe((data: any) => {
+                this.users.splice(0);
+                data.forEach(element => {
+                    this.users.push(element);
+                    console.log(element);
                 });
-            });
-           
-        component.flag = true;        
-        })
-                                   
-                                    
+            })
+
+
     }
-    
-    cadastrarUsuario(usuario){
-        console.log("inspecao:"+this.baseURL+'inserir');
-        this.http.post(this.baseURL+'inserir', usuario).subscribe((data: any) => {
-        console.log("data resposta: "+data);    
-          
-        })
+
+    cadastrarUsuario(usuario) {
+        console.log("inspecao:" + this.baseURL + 'inserir');
+        this.http.post(this.baseURL + 'inserir', usuario).subscribe((data: any) => {
+            console.log("data resposta: " + data);
+            this.getUsuarios();
+            this.location.back();
+        });
+
     }
-    
+
+    atualizarUsuario(usuario) {
+        //console.log("inspecao:"+this.baseURL+'inserir');
+        this.http.put(this.baseURL + 'update', usuario).subscribe((data: any) => {
+            console.log("data resposta: " + data);
+            this.getUsuarios();
+            this.location.back();
+        });
+
+    }
+    deletarUsuario(usuario) {
+
+        console.log("usuario" + JSON.stringify(usuario));
+        this.http.request('delete', this.baseURL + 'deletar', { body: usuario })
+            .subscribe((data: any) => {
+                /* console.log("data resposta:"+JSON.stringify(data));*/
+                this.getUsuarios();
+            })
+    }
 }
