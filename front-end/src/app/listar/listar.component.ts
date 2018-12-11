@@ -2,12 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { HttpService } from '../http.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
 export interface Pessoa {
   name: string;
@@ -22,26 +16,24 @@ export interface Pessoa {
 })
 export class ListarComponent implements OnInit {
   //displayedColumns: string[] = ['nome', 'senha'];
-    users = [];
-    user;
-    httpService : HttpService;
-    atualizar = false;
-  constructor(httpService : HttpService) { 
-    this.httpService = httpService;
+  users = [];
+  user;
+  constructor(public httpService: HttpService) {
+
     this.users = this.httpService.users;
   }
 
   ngOnInit() {
-    this.httpService.getUsuarios();   
+    this.httpService.getUsuarios();
   }
-  deletar(usuario){
-    console.log('usuario.id'+usuario._id);
-    this.httpService.deletarUsuario(usuario);
+
+
+  deletar(usuario) {
+
+    if (confirm("Voçê realmente deseja deletar  usuario " + usuario.nome))
+      this.httpService.deletarUsuario(usuario);
 
   }
 
-  alterar(usuario){
-    this.user = usuario;
-    this.atualizar = true;
-  }
+
 }

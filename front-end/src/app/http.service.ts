@@ -38,6 +38,7 @@ export class HttpService {
         this.http.post(this.baseURL + 'inserir', usuario).subscribe((data: any) => {
             console.log("data resposta: " + data);
             this.getUsuarios();
+            alert("Usuario "+usuario.nome+" Cadastrado com sucesso.");
             this.location.back();
         });
 
@@ -48,6 +49,7 @@ export class HttpService {
         this.http.put(this.baseURL + 'update', usuario).subscribe((data: any) => {
             console.log("data resposta: " + data);
             this.getUsuarios();
+            alert("Usuario "+usuario.nome+" Atualizado com sucesso.");
             this.location.back();
         });
 
@@ -58,7 +60,9 @@ export class HttpService {
         this.http.request('delete', this.baseURL + 'deletar', { body: usuario })
             .subscribe((data: any) => {
                 /* console.log("data resposta:"+JSON.stringify(data));*/
+                alert("Usuario"+usuario.nome+" deletado.");
                 this.getUsuarios();
+
             })
     }
 }
